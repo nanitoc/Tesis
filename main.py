@@ -6,6 +6,7 @@ import cv2 as cv
 # and train image This query image
 # is what you need to find in train image
 # Save it in the same directory
+#
 # with the name image.jpg 
 query_img = cv.imread('Train/IMG1.jpg')
 train_img = cv.imread('Train/IMG2.jpg')
