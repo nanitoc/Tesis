@@ -15,6 +15,8 @@ cv.imshow('Gray', gray)
 blur = cv.GaussianBlur(img, (7,7), cv.BORDER_DEFAULT)
 cv.imshow('Blur', blur)
 
+
+#test
 # Edge Cascade
 canny = cv.Canny(blur, 90, 90)
 cv.imshow('Canny Edges', canny)
