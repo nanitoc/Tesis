@@ -3,7 +3,6 @@ import numpy as np
 import argparse
 import imutils
 import cv2 as cv
-import matplotlib.pyplot as plt
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
