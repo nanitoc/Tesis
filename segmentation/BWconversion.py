@@ -6,7 +6,6 @@ import argparse
 import imutils
 import cv2 as cv
 from matplotlib import pyplot as plt
-import os
 
 # Read the image and convert to black and white then equalize the image
 img = cv.imread('segmentation/img/recorte.png')
