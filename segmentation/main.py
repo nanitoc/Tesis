@@ -6,7 +6,7 @@ import cv2 as cv
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", type=str, default="img/trampa cromatica con fondo.jpg")
+ap.add_argument("-i", "--image", type=str, default="segmentation/img/trampa cromatica con fondo.jpg")
 args = vars(ap.parse_args())
 
 # load the image and display it
