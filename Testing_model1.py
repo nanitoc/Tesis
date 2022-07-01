@@ -12,6 +12,6 @@ def prepare(filepath):
 
 model = keras.models.load_model("Alert-noAlert-64x3-CNN.model")
 
-prediction = model.predict([prepare('Train/NoAlert_T1.jpg')])
+prediction = model.predict([prepare('Train/IMG2.jpg')])
 print(CATEGORIES[int(prediction[0][0])])
 #'Train/Alert_T1.jpg',

@@ -36,8 +36,8 @@ print(len(Training_data))
 import random
 
 random.shuffle(Training_data)
-for sample in Training_data:
-    print(sample[1])
+#for sample in Training_data:
+    #print(sample[1])
 
 x = []
 y = []
