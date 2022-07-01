@@ -77,7 +77,7 @@ for i in range(0, numLabels):
 	# show our output image and connected component mask
 	cv.imshow("Output", output)
 	cv.imshow("Connected Component", componentMask)
-	
+	cv.waitKey(0)
 
 cv.waitKey(0)
 
