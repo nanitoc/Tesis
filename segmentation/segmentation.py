@@ -1,4 +1,5 @@
 # import the necessary packages
+from cProfile import label
 from msilib.schema import Directory
 from cv2 import cvtColor, threshold
 import numpy as np
@@ -77,8 +78,21 @@ for i in range(0, numLabels):
 	# show our output image and connected component mask
 	cv.imshow("Output", output)
 	cv.imshow("Connected Component", componentMask)
-	cv.waitKey(0)
+	# Show each image section for every insect
+	final_image = cv.bitwise_and(img, img, mask=componentMask)
+	# Crop every label with a margin
+	cropped_final = final_image[y:y+h+20,x:x+w+20]
 
+	# Resize the image in 100% for better view
+	scale_percent = 120 # percent of original size
+	width = int(cropped_final.shape[1] * scale_percent / 100)
+	height = int(cropped_final.shape[0] * scale_percent / 100)
+	dim = (width, height)
+	resize_cropped = cv.resize(cropped_final, dim, interpolation=cv.INTER_AREA)
+	# Show each label corresponding to each insect detected
+	cv.imshow('Final Image', resize_cropped)
+	cv.waitKey(0)
+	
 cv.waitKey(0)
 
 

@@ -30,10 +30,9 @@ img = cv.drawContours(output, [c], -1, (0, 255, 0), 3)
 (x, y, w, h) = cv.boundingRect(c)
 
 # Crop the image
-
 cropped_image = img[y:y+h,x:x+w]
-# show the original contour image
 
+# show the original contour image
 cv.imshow("Original Contour", cropped_image)
 cv.waitKey(0)
 
