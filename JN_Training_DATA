@@ -7,8 +7,9 @@ import tensorflow as tf
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation, Flatten, Conv2D, MaxPooling2D
 
-DATADIR= "C:/Users/jerem/Desktop/JN_test1"
-CATEGORIES = ["Alert" , "No Alert" ]
+DATADIR= "C:/Users/jerem/Desktop/DATASET_ALERT-NOALERT"
+CATEGORIES = ["Alert" , "No Alert"]  #Para modelo 1
+#CATEGORIES = ["Alert" , "No Alert 1", "No Alert 2" ]
 
 IMG_SIZE = 300          #size de la imagen
 
