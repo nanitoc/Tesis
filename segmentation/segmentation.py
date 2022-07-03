@@ -23,7 +23,7 @@ hist_eq = cv.equalizeHist(gray)
 cv.imshow('Gray', gray)
 cv.imshow('Histogram', hist_eq)
 
-# Threshold and binarization applying a threshold value at design time of value 18.5.
+# Threshold and binarization applying a threshold value at design time of value 15.
 ret, threshold = cv.threshold(hist_eq, 15, 255, cv.THRESH_BINARY_INV)
 cv.imshow('Binary', threshold)
 
