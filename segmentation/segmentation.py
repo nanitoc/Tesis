@@ -84,7 +84,7 @@ for i in range(0, numLabels):
 	cropped_final = final_image[y:y+h+20,x:x+w+20]
 
 	# Resize the image in 100% for better view
-	scale_percent = 120 # percent of original size
+	scale_percent = 500 # percent of original size
 	width = int(cropped_final.shape[1] * scale_percent / 100)
 	height = int(cropped_final.shape[0] * scale_percent / 100)
 	dim = (width, height)
