@@ -9,7 +9,12 @@ import cv2 as cv
 from matplotlib import pyplot as plt
 
 # Read the image and convert to black and white then equalize the image
-img = cv.imread('segmentation/img/recorte.png')
+img_original = cv.imread('segmentation/img/recorte3.jpg')
+scale_percent_original = 40 # percent of original size
+width_original = int(img_original.shape[1] * scale_percent_original / 100)
+height_original = int(img_original.shape[0] * scale_percent_original / 100)
+dim_original = (width_original, height_original)
+img = cv.resize(img_original, dim_original, interpolation=cv.INTER_AREA)
 
 # print(type(img))
 gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
@@ -18,8 +23,8 @@ hist_eq = cv.equalizeHist(gray)
 cv.imshow('Gray', gray)
 cv.imshow('Histogram', hist_eq)
 
-# Threshold and binarization applying a threshold value at design time of value 7.
-ret, threshold = cv.threshold(hist_eq, 7, 255, cv.THRESH_BINARY_INV)
+# Threshold and binarization applying a threshold value at design time of value 18.5.
+ret, threshold = cv.threshold(hist_eq, 15, 255, cv.THRESH_BINARY_INV)
 cv.imshow('Binary', threshold)
 
 # A kervel of elliptical shape with rows and colums multiples of 120
@@ -84,7 +89,7 @@ for i in range(0, numLabels):
 	cropped_final = final_image[y:y+h+20,x:x+w+20]
 
 	# Resize the image in 100% for better view
-	scale_percent = 500 # percent of original size
+	scale_percent = 250 # percent of original size
 	width = int(cropped_final.shape[1] * scale_percent / 100)
 	height = int(cropped_final.shape[0] * scale_percent / 100)
 	dim = (width, height)
