@@ -16,10 +16,28 @@ height_original = int(img_original.shape[0] * scale_percent_original / 100)
 dim_original = (width_original, height_original)
 img = cv.resize(img_original, dim_original, interpolation=cv.INTER_AREA)
 
-# print(type(img))
+# Convert to gray scales
 gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+
+# Show histograms
+hist = cv.calcHist([img_original], [0], None, [256], [0, 256])
+plt.plot(hist, color='gray' )
+plt.xlabel('intensidad de iluminacion')
+plt.ylabel('cantidad de pixeles')
+plt.show()
+
+# Equalize Histogram
+cv.destroyAllWindows()
 hist_eq = cv.equalizeHist(gray)
 
+# Show histograms
+hist = cv.calcHist([hist_eq], [0], None, [256], [0, 256])
+plt.plot(hist, color='gray' )
+plt.xlabel('intensidad de iluminacion')
+plt.ylabel('cantidad de pixeles')
+plt.show()
+
+# Show images in gray scale and equalized
 cv.imshow('Gray', gray)
 cv.imshow('Histogram', hist_eq)
 
