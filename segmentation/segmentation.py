@@ -19,7 +19,7 @@ img = cv.resize(img_original, dim_original, interpolation=cv.INTER_AREA)
 # Convert to gray scales
 gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 
-# Show histograms
+# Calculate histograms
 hist = cv.calcHist([img_original], [0], None, [256], [0, 256])
 plt.plot(hist, color='gray' )
 plt.xlabel('intensidad de iluminacion')
@@ -27,7 +27,6 @@ plt.ylabel('cantidad de pixeles')
 plt.show()
 
 # Equalize Histogram
-cv.destroyAllWindows()
 hist_eq = cv.equalizeHist(gray)
 
 # Show histograms
@@ -45,7 +44,7 @@ cv.imshow('Histogram', hist_eq)
 ret, threshold = cv.threshold(hist_eq, 15, 255, cv.THRESH_BINARY_INV)
 cv.imshow('Binary', threshold)
 
-# A kervel of elliptical shape with rows and colums multiples of 120
+# A kernel of elliptical shape with rows and columns multiples of 120
 kernel = cv.getStructuringElement(cv.MORPH_ELLIPSE, (threshold.shape[0]//120,threshold.shape[1]//120))
 # Dilatation with 1 iteration
 dilation = cv.dilate(threshold,kernel,iterations = 1)
