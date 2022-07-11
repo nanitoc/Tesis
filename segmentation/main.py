@@ -1,38 +1,39 @@
-# import the necessary packages
+# importar los paquetes necesarios
 import numpy as np
 import argparse
 import imutils
 import cv2 as cv
 
-# construct the argument parser and parse the arguments
+# construir el analizador de argumentos y analizar los argumentos
 ap = argparse.ArgumentParser()
 ap.add_argument("-i", "--image", type=str, default="segmentation/img/trampa cromatica1.jpg")
 args = vars(ap.parse_args())
 
-# load the image and display it
+# carga la imagen y la muestra
 image = cv.imread(args["image"])
 cv.imshow("Image", image)
 
-# convert the image to grayscale and threshold it
+# convertir la imagen a escala de grises y umbralizarla
 gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
 thresh = cv.threshold(gray, 110, 255,
 	cv.THRESH_BINARY)[1]
+cv.imshow("Thresh", thresh)
 
-# find the largest contour in the threshold image
+# encuentre el contorno más grande en la imagen del umbral
 cnts = cv.findContours(thresh, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_NONE)
 cnts = imutils.grab_contours(cnts)
 c = max(cnts, key=cv.contourArea)
 
-# draw the shape of the contour on the output image, compute the
-# bounding box, and display the number of points in the contour
+# dibuje la forma del contorno en la imagen de salida, calcule el cuadro
+# delimitador y muestre el número de puntos en el contorno
 output = image.copy()
 img = cv.drawContours(output, [c], -1, (0, 255, 0), 3)
 (x, y, w, h) = cv.boundingRect(c)
 
-# Crop the image
+# recortar la imagen
 cropped_image = img[y:y+h,x:x+w]
 
-# show the original contour image
+# mostrar la imagen de contorno original
 cv.imshow("Original Contour", cropped_image)
 cv.waitKey(0)
 
