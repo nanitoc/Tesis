@@ -23,7 +23,7 @@ print(CATEGORIES[int(prediction[0][0])])
 
 
 
-prediction = model.predict([prepare(   Path de image a probar   )])
+prediction = model.predict([prepare('Path de imagen a probar')])
 print(CATEGORIES[int(prediction[0][0])])   # printear
 
 
