@@ -6,7 +6,7 @@ import cv2 as cv
 
 # construir el analizador de argumentos y analizar los argumentos
 ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", type=str, default="segmentation/img/trampa cromatica1.jpg")
+ap.add_argument("-i", "--image", type=str, default="Prueba/Test1.jpeg")
 args = vars(ap.parse_args())
 
 # carga la imagen y la muestra
