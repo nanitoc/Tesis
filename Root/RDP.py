@@ -1,4 +1,5 @@
 # importar los paquetes necesarios
+from matplotlib.pyplot import thetagrids
 import numpy as np
 import argparse
 import imutils
@@ -6,7 +7,7 @@ import cv2 as cv
 
 # construir el analizador de argumentos y analizar los argumentos
 ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", type=str, default="Root\Prueba\Test2.jpeg")
+ap.add_argument("-i", "--image", type=str, default="Root\Prueba\Force4.png")
 args = vars(ap.parse_args())
 
 # carga la imagen y la muestra
@@ -15,7 +16,7 @@ cv.imshow("Image", image)
 
 # convertir la imagen a escala de grises y umbralizarla
 gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
-thresh = cv.threshold(gray, 153, 255,
+thresh = cv.threshold(gray, 163, 255,
 	cv.THRESH_BINARY)[1]
 cv.imshow("Thresh", thresh)
 
@@ -28,16 +29,31 @@ for c in cnts:
 	# dibuje la forma del contorno en la imagen de salida, calcule el cuadro
 	# delimitador y muestre el número de puntos en el contorno
 	output = image.copy()
-	mask = np.zeros(output.shape, dtype="uint8")
 	img = cv.drawContours(output, [c], -1, (0, 255, 0), 3)
+
+	# umbral en blanco
+	# definir límites inferior y superior
+	lower = np.array([200, 200, 200])
+	upper = np.array([255, 255, 255])
+	# crear máscara para seleccionar solo negro
+	thresh = cv.inRange(image, lower, upper)
+
+	# aplicar morfología
+	kernel = cv.getStructuringElement(cv.MORPH_RECT, (6, 6))
+	morph = cv.morphologyEx(thresh, cv.MORPH_CLOSE, kernel)
+
+	# invertir imagen morfologica
+	mask = 255 - morph
+
 	# aplicar mascara para que el fondo sea negro y solo quede el ROI
-	final_image = cv.bitwise_and(img, img, mask=thresh)
+	final_image = cv.bitwise_and(image, image, mask=mask)
 
 	# recortar la imagen
 	cropped_image = final_image[y:y+h,x:x+w]
 
 # mostrar la imagen de contorno original
 cv.imshow("Original Contour", cropped_image)
+cv.imwrite("Root\Prueba\Force_crop.png", cropped_image)
 cv.waitKey(0)
 
 

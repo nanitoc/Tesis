@@ -11,7 +11,7 @@ def prepare(filepath):
     new_array = cv2.resize(img_array, (IMG_SIZE,IMG_SIZE))
     return new_array.reshape(-1,IMG_SIZE,IMG_SIZE,1)
 
-model = keras.models.load_model("Alert-noAlert-64x3-CNN-CROPPED-Dia-Mosquitos-DAugmented.model")
+model = keras.models.load_model("Root/Alert-noAlert-64x3-CNN-CROPPED-Dia-Mosquitos-DAugmented.model")
 
 """""
 prediction = model.predict([prepare(f'Train/D2C.jpg')])
@@ -23,7 +23,7 @@ print(CATEGORIES[int(prediction[0][0])])
 
 
 
-prediction = model.predict([prepare('Path de imagen a probar')])
+prediction = model.predict([prepare('Root/Prueba/Plaga/pueba5_13.png')])
 print(CATEGORIES[int(prediction[0][0])])   # printear
 
 
