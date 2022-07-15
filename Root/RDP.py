@@ -53,6 +53,7 @@ for c in cnts:
 
 # mostrar la imagen de contorno original
 cv.imshow("Original Contour", cropped_image)
+# guardar imagen para su posterior utilizacion
 cv.imwrite("Root\Prueba\Force_crop.png", cropped_image)
 cv.waitKey(0)
 

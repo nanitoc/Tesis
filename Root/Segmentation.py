@@ -110,9 +110,12 @@ for i in range(1, numLabels):
 	# mostrar cada etiqueta correspondiente a cada insecto detectado
 	cv.imshow("Final Image", cropped_final)
 	
-	input_path = r"Root/Prueba/*.png"
+	# poner las imagenes seccionadas en la carpeta Prueba con un aumento 
+	# de 100% de su tamano original
 
-	# make sure below folder already exists
+	# carpeta raiz
+	input_path = r"Root/Prueba/*.png"
+	# carpeta de salida de imagenes
 	out_path = "Root/Prueba/Plaga/"
 
 	image_paths = list(glob.glob(input_path))
@@ -122,9 +125,10 @@ for i in range(1, numLabels):
 		width = int(cropped_final.shape[1] * scale_percent / 100)
 		height = int(cropped_final.shape[0] * scale_percent / 100)
 		dim = (width, height)
-  
-		# resize image
+  		# aumentar escala de la imagen
 		final_image = cv.resize(cropped_final, dim, interpolation = cv.INTER_AREA)
+
+		# salida de las imagenes en carpeta prueba
 		cv.imwrite(out_path + f'prueba5_{str(i)}.png', final_image)
 		cv.waitKey(0)
 cv.waitKey(0)
