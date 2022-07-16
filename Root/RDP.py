@@ -29,15 +29,15 @@ def RDP(path):
 	for c in cnts:
 		(x, y, w, h) = cv.boundingRect(c)
 		# dibuje la forma del contorno en la imagen de salida, calcule el cuadro
-		# delimitador y muestre el número de puntos en el contorno
+		# delimitador y muestre el numero de puntos en el contorno
 		output = image.copy()
 		img = cv.drawContours(output, [c], -1, (0, 255, 0), 3)
 
 		# umbral en blanco
-		# definir límites inferior y superior
+		# definir limites inferior y superior
 		lower = np.array([200, 200, 200])
 		upper = np.array([255, 255, 255])
-		# crear máscara para seleccionar solo negro
+		# crear mascara para seleccionar solo negro
 		thresh = cv.inRange(image, lower, upper)
 
 		# aplicar morfología
