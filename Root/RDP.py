@@ -7,7 +7,7 @@ import cv2 as cv
 
 # construir el analizador de argumentos y analizar los argumentos
 ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", type=str, default="Root\Prueba\Force4.png")
+ap.add_argument("-i", "--image", type=str, default="Root/Prueba/Forcemezcla.png")
 args = vars(ap.parse_args())
 
 # carga la imagen y la muestra
@@ -54,7 +54,7 @@ for c in cnts:
 # mostrar la imagen de contorno original
 cv.imshow("Original Contour", cropped_image)
 # guardar imagen para su posterior utilizacion
-cv.imwrite("Root\Prueba\Force_crop.png", cropped_image)
+cv.imwrite("Root/Prueba/Force_crop5.png", cropped_image)
 cv.waitKey(0)
 
 

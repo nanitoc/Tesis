@@ -23,7 +23,7 @@ print(CATEGORIES[int(prediction[0][0])])
 
 
 
-prediction = model.predict([prepare('Root/Prueba/Plaga/pueba5_13.png')])
+prediction = model.predict([prepare('Root/Prueba2/mezcla2_16.png')])
 print(CATEGORIES[int(prediction[0][0])])   # printear
 
 
