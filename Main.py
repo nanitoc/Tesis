@@ -1,7 +1,7 @@
 import cv2 as cv
-from RDP import  RDP
-from Segmentation import Segmentation
-from Test import Test
+from Root.RDP import  RDP
+from Root.Segmentation import Segmentation
+from Root.Test import Test
 
 
 img = RDP("Root/Prueba/Grande2.png")
