@@ -6,7 +6,7 @@ import numpy as np
 import argparse
 import imutils
 import cv2 as cv
-import glob
+# import glob
 from matplotlib import pyplot as plt
 SEG=[]
 
@@ -14,17 +14,17 @@ def Segmentation(img_original):
 
 	# leer la imagen y convertirla a blanco y negro, luego ecualizar la imagen
 	#img_original = cv.imread(path)
-	scale_percent_original = 100 # aumento en por ciento de la escala original
-	width_original = int(img_original.shape[1] * scale_percent_original / 100)
-	height_original = int(img_original.shape[0] * scale_percent_original / 100)
-	dim_original = (width_original, height_original)
-	img = cv.resize(img_original, dim_original, interpolation=cv.INTER_CUBIC)
+	# scale_percent_original = 100 # aumento en por ciento de la escala original
+	# width_original = int(img_original.shape[1] * scale_percent_original / 100)
+	# height_original = int(img_original.shape[0] * scale_percent_original / 100)
+	# dim_original = (width_original, height_original)
+	# img = cv.resize(img_original, dim_original, interpolation=cv.INTER_CUBIC)
 
 	# convertir a escalas de grises
 	gray = cv.cvtColor(img_original, cv.COLOR_BGR2GRAY)
 
 	# calcular histogramas
-	hist = cv.calcHist([img_original], [0], None, [256], [0, 256])
+	# hist = cv.calcHist([img_original], [0], None, [256], [0, 256])
 	# plt.plot(hist, color='gray' )
 	# plt.xlabel('intensidad de iluminacion')
 	# plt.ylabel('cantidad de pixeles')
@@ -84,7 +84,7 @@ def Segmentation(img_original):
 			text = "examining component {}/{}".format( i + 1, numLabels)
 		# imprimir una actualizacion de mensaje de estado para el 
 		# componente conectado actual
-		print("[INFO] {}".format(text))
+		# print("[INFO] {}".format(text))
 		# extraer las estadisticas del componente conectado 
 		# y el centroide para la etiqueta actual
 		x = stats[i, cv.CC_STAT_LEFT]
@@ -125,7 +125,7 @@ def Segmentation(img_original):
 			cropped_final = mask[y:y+h,x:x+w]
 			cropped_final[np.where(cropped_final == [0])] = [165]
 			# mostrar cada etiqueta correspondiente a cada insecto detectado
-			cv.imshow("Final Image", cropped_final)
+			# cv.imshow("Final Image", cropped_final)
 			final_image = cv.cvtColor(cropped_final, cv.COLOR_BGR2GRAY)
 			# print(w)
 			# print(h)
@@ -166,9 +166,6 @@ def Segmentation(img_original):
 			# cv.imwrite(out_path + f'mezcla_{str(i)}.png', final_image)
 
 		cv.waitKey(0)
-	
-		
-	# cv.waitKey(0)
 	return SEG
 
 

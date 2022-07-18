@@ -30,8 +30,8 @@ def RDP(path):
 		(x, y, w, h) = cv.boundingRect(c)
 		# dibuje la forma del contorno en la imagen de salida, calcule el cuadro
 		# delimitador y muestre el numero de puntos en el contorno
-		output = image.copy()
-		img = cv.drawContours(output, [c], -1, (0, 255, 0), 3)
+		# output = image.copy()
+		# img = cv.drawContours(output, [c], -1, (0, 255, 0), 3)
 
 		# umbral en blanco
 		# definir limites inferior y superior
