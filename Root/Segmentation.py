@@ -3,11 +3,11 @@ from cProfile import label
 from msilib.schema import Directory
 from cv2 import cvtColor, threshold
 import numpy as np
-import argparse
-import imutils
+# import argparse
+# import imutils
 import cv2 as cv
 # import glob
-from matplotlib import pyplot as plt
+# from matplotlib import pyplot as plt
 SEG=[]
 
 def Segmentation(img_original):
@@ -121,8 +121,10 @@ def Segmentation(img_original):
 			mask = cv.bitwise_and(img_original,img_original, mask=componentMask)
 			# recortar cada imagen
 			cropped_final = mask[y:y+h,x:x+w]
+			# cambia de color el fondo negro de cada imagen recortada
+			# para el analisis posterior de las imagenes
 			cropped_final[np.where(cropped_final == [0])] = [165]
-			# mostrar cada etiqueta correspondiente a cada insecto detectado
+			# # mostrar cada etiqueta correspondiente a cada insecto detectado
 			# cv.imshow("Final Image", cropped_final)
 			final_image = cv.cvtColor(cropped_final, cv.COLOR_BGR2GRAY)
 			# print(w)
