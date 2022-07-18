@@ -28,8 +28,8 @@ def RDP(path):
 	cnts = sorted(cnts, key=cv.contourArea, reverse=False)
 	for c in cnts:
 		(x, y, w, h) = cv.boundingRect(c)
-		# dibuje la forma del contorno en la imagen de salida, calcule el cuadro
-		# delimitador y muestre el numero de puntos en el contorno
+		# # dibuje la forma del contorno en la imagen de salida, calcule el cuadro
+		# # delimitador y muestre el numero de puntos en el contorno
 		# output = image.copy()
 		# img = cv.drawContours(output, [c], -1, (0, 255, 0), 3)
 
@@ -53,9 +53,9 @@ def RDP(path):
 		# recortar la imagen
 		cropped_image = final_image[y:y+h,x:x+w]
 
-	# mostrar la imagen de contorno original
-	#cv.imshow("Original Contour", cropped_image)
-	# guardar imagen para su posterior utilizacion
+	# # mostrar la imagen de contorno original
+	# cv.imshow("Original Contour", cropped_image)
+	# # guardar imagen para su posterior utilizacion
 	# cv.imwrite("Root/Prueba/Force_crop5.png", cropped_image)
 	# cv.waitKey(0)
 	return cropped_image

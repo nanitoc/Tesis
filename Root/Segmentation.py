@@ -69,46 +69,44 @@ def Segmentation(img_original):
 	output = cv.connectedComponentsWithStats(dilatation2, connectivity, cv.CV_32S)
 	(numLabels, labels, stats, centroids) = output
 
-	# inicializar una mascara de salida para almacenar todos los insectos de la imagen
-	mask = np.zeros(gray.shape, dtype="uint8")
-	
 	# bucle sobre el numero de etiquetas de componentes conectados unicos
-	for i in range(0, numLabels):
-		# si este es el primer componente, entonces examinamos el *fondo* 
-		# (simplemente ignoramos este componente en nuestro ciclo)
-		if i == 0:
-			text = "examining component {}/{} (start)".format(
-				i + 1, numLabels)
-		# de lo contrario, estamos examinando un componente conectado real
-		else:
-			text = "examining component {}/{}".format( i + 1, numLabels)
-		# imprimir una actualizacion de mensaje de estado para el 
-		# componente conectado actual
+	# recorre el número de etiquetas de componentes conectadas unicos, 
+	# omitiendo la primera etiqueta (ya que la etiqueta cero es el fondo)
+	for i in range(1, numLabels):
+		# # si este es el primer componente, entonces examinamos el *fondo* 
+		# # (simplemente ignoramos este componente en nuestro ciclo)
+		# if i == 0:
+		# 	text = "examining component {}/{} (start)".format(
+		# 		i + 1, numLabels)
+		# # de lo contrario, estamos examinando un componente conectado real
+		# else:
+		# 	text = "examining component {}/{}".format( 
+		# 		i + 1, numLabels)
+		# # imprimir una actualizacion de mensaje de estado para el 
+		# # componente conectado actual
 		# print("[INFO] {}".format(text))
-		# extraer las estadisticas del componente conectado 
-		# y el centroide para la etiqueta actual
+		# # extraer las estadisticas del componente conectado 
+		# # y el centroide para la etiqueta actual
 		x = stats[i, cv.CC_STAT_LEFT]
 		y = stats[i, cv.CC_STAT_TOP]
 		w = stats[i, cv.CC_STAT_WIDTH]
 		h = stats[i, cv.CC_STAT_HEIGHT]
 		area = stats[i, cv.CC_STAT_AREA]
-		(cX, cY) = centroids[i]
-		# clonar nuestra imagen original (para que podamos dibujar sobre ella) 
-		# y luego dibujar un cuadro delimitador que rodee el componente 
-		# conectado junto con un circulo correspondiente al centroide
-		output = img_original.copy()
-		cv.rectangle(output, (x, y), (x + w, y + h), (0, 255, 0), 3)
-		cv.circle(output, (int(cX), int(cY)), 4, (0, 0, 255), -1)
+		# (cX, cY) = centroids[i]
+		# # clonar nuestra imagen original (para que podamos dibujar sobre ella) 
+		# # y luego dibujar un cuadro delimitador que rodee el componente 
+		# # conectado junto con un circulo correspondiente al centroide
+		# output = img_original.copy()
+		# cv.rectangle(output, (x, y), (x + w, y + h), (0, 255, 0), 3)
+		# cv.circle(output, (int(cX), int(cY)), 4, (0, 0, 255), -1)
 
-		# construir una mascara para el componente conectado 
-		# actual encontrando pixeles en la matriz de etiquetas
-		# que tengan el ID del componente conectado actual
-		componentMask = (labels == i).astype("uint8") * 255
-		final_image = cv.bitwise_and(img_original, img_original, mask=componentMask)
-		
+		# # construir una mascara para el componente conectado 
+		# # actual encontrando pixeles en la matriz de etiquetas
+		# # que tengan el ID del componente conectado actual
+		# componentMask = (labels == i).astype("uint8") * 255
+				
 		# filtrar las imagenes a traves del ancho, la altura y el area 
-		# que estas no sean ni demasiada pequeñas ni demasiada grandes
-		
+		# que estas no sean ni demasiada pequeñas ni demasiada grandes		
 		keepWidth = w > 25 and w < 150
 		keepHeight = h > 25 and h < 150
 		keepArea = area > 1000 and area < 9000
@@ -133,18 +131,15 @@ def Segmentation(img_original):
 			SEG.append(final_image)
 		else:
 			# muestra texto del componente examinado actual
-			text = "examining component {}/{}".format(i + 1, numLabels)
-		print("[INFO] {}".format(text))			
-			
-			
+			print("[INFO] examining component {}/{}".format(i, numLabels-1))	
 		# # recorta cada etiqueta con un margen
 		# cropped_final = mask[y:y+h,x:x+w]
 		# cropped_final[np.where(cropped_final == [0])] = [165]
 		# # mostrar cada etiqueta correspondiente a cada insecto detectado
 		# cv.imshow("Final Image", cropped_final)
 						
-		# poner las imagenes seccionadas en la carpeta Prueba con un aumento 
-		# de 100% de su tamano original
+		# # poner las imagenes seccionadas en la carpeta Prueba con un aumento 
+		# # de 100% de su tamano original
 
 		# # carpeta raiz
 		# input_path = r"Root/Prueba/*.png"
@@ -162,7 +157,7 @@ def Segmentation(img_original):
 		# 	final_image = cv.resize(cropped_final, dim, interpolation = cv.INTER_AREA)
 		# 	
 				
-			# salida de las imagenes en carpeta prueba
+			# # salida de las imagenes en carpeta prueba
 			# cv.imwrite(out_path + f'mezcla_{str(i)}.png', final_image)
 
 		cv.waitKey(0)
