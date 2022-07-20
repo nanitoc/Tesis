@@ -12,7 +12,8 @@ SEG=[]
 
 def Segmentation(img_original):
 
-	# leer la imagen y convertirla a blanco y negro, luego ecualizar la imagen
+	# leer la imagen, dimensionarla, convertirla a blanco y negro y luego ecualizar 
+	# la imagen
 	#img_original = cv.imread(path)
 	# scale_percent_original = 100 # aumento en por ciento de la escala original
 	# width_original = int(img_original.shape[1] * scale_percent_original / 100)
@@ -73,8 +74,8 @@ def Segmentation(img_original):
 	# recorre el número de etiquetas de componentes conectadas unicos, 
 	# omitiendo la primera etiqueta (ya que la etiqueta cero es el fondo)
 	for i in range(1, numLabels):
-		# # si este es el primer componente, entonces examinamos el *fondo* 
-		# # (simplemente ignoramos este componente en nuestro ciclo)
+		# # el primer componente es el *fondo* (ignoramos este componente en 
+   		# # nuestro ciclo)    
 		# if i == 0:
 		# 	text = "examining component {}/{} (start)".format(
 		# 		i + 1, numLabels)
@@ -123,7 +124,7 @@ def Segmentation(img_original):
 			cropped_final = mask[y:y+h,x:x+w]
 			# cambia de color el fondo negro de cada imagen recortada
 			# para el analisis posterior de las imagenes
-			cropped_final[np.where(cropped_final == [0])] = [165]
+			cropped_final[np.where(cropped_final == [0])] = [200]
 			# # mostrar cada etiqueta correspondiente a cada insecto detectado
 			# cv.imshow("Final Image", cropped_final)
 			final_image = cv.cvtColor(cropped_final, cv.COLOR_BGR2GRAY)
