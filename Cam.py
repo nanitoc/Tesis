@@ -1,19 +1,16 @@
-# import the necessary packages
-import time
-import pibooth
-import libcamera
 import cv2 as cv
 
-from pibooth.utils import LOGGER
-from pibooth.camera.base import BaseCamera
-# initialize the camera and grab a reference to the raw camera capture
-camera = BaseCamera()
-rawCapture = PiRGBArray(camera)
-# allow the camera to warmup
-time.sleep(0.1)
-# grab an image from the camera
-camera.capture(rawCapture, format="rgb")
-image = rawCapture.array
-# display the image on screen and wait for a keypress
-cv.imshow("Image", image)
-cv.waitKey(0)
+
+cap = cv.VideoCapture(3)
+
+while(True):
+    ret, frame = cap.read()
+    rgb = cv.cvtColor(frame, cv.COLOR_BGR2BGRA)
+
+    cv.imshow('frame', rgb)
+    if cv.waitKey(1) & 0xFF == ord('q'):
+        out = cv.imwrite('Root\Prueba\Trampa.png', frame)
+        break
+
+cap.release()
+cv.destroyAllWindows()
