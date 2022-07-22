@@ -18,7 +18,7 @@ def RDP(path):
 
 	# convertir la imagen a escala de grises y umbralizarla
 	gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
-	thresh = cv.threshold(gray, 163, 255,
+	thresh = cv.threshold(gray, 120, 255,
 		cv.THRESH_BINARY)[1]
 	# cv.imshow("Thresh", thresh)
 

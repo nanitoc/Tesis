@@ -14,8 +14,8 @@ def Segmentation(img_original):
 
 	# leer la imagen, dimensionarla, convertirla a blanco y negro y luego ecualizar 
 	# la imagen
-	#img_original = cv.imread(path)
-	# scale_percent_original = 100 # aumento en por ciento de la escala original
+	# img_original = cv.imread(path)
+	# scale_percent_original = 20 # aumento en por ciento de la escala original
 	# width_original = int(img_original.shape[1] * scale_percent_original / 100)
 	# height_original = int(img_original.shape[0] * scale_percent_original / 100)
 	# dim_original = (width_original, height_original)
@@ -101,16 +101,16 @@ def Segmentation(img_original):
 		# cv.rectangle(output, (x, y), (x + w, y + h), (0, 255, 0), 3)
 		# cv.circle(output, (int(cX), int(cY)), 4, (0, 0, 255), -1)
 
-		# # construir una mascara para el componente conectado 
-		# # actual encontrando pixeles en la matriz de etiquetas
-		# # que tengan el ID del componente conectado actual
-		# componentMask = (labels == i).astype("uint8") * 255
+		# construir una mascara para el componente conectado 
+		# actual encontrando pixeles en la matriz de etiquetas
+		# que tengan el ID del componente conectado actual
+		componentMask = (labels == i).astype("uint8") * 255
 				
 		# filtrar las imagenes a traves del ancho, la altura y el area 
 		# que estas no sean ni demasiada pequeñas ni demasiada grandes		
 		keepWidth = w > 25 and w < 150
 		keepHeight = h > 25 and h < 150
-		keepArea = area > 1000 and area < 9000
+		keepArea = area > 1600 and area < 9000
 		# asegurar que el componente conectado que se esta 
 		# examinando pase las tres pruebas
 		cropped_final = []
@@ -126,7 +126,8 @@ def Segmentation(img_original):
 			# para el analisis posterior de las imagenes
 			cropped_final[np.where(cropped_final == [0])] = [200]
 			# # mostrar cada etiqueta correspondiente a cada insecto detectado
-			# cv.imshow("Final Image", cropped_final)
+			cv.imshow("Final Image", cropped_final)
+			# cv.imshow("Output", output)
 			final_image = cv.cvtColor(cropped_final, cv.COLOR_BGR2GRAY)
 			# print(w)
 			# print(h)
